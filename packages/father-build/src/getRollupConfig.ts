@@ -84,13 +84,14 @@ export default function(opts: IGetRollupConfigOpts): RollupOptions[] {
       typescript: true,
       runtimeHelpers,
       nodeVersion,
+      vueCompile: umd ? umd.vueCompile : false
     }).opts),
     // ref: https://github.com/rollup/plugins/tree/master/packages/babel#babelhelpers
     babelHelpers: (runtimeHelpers ? 'runtime' : 'bundled') as RollupBabelInputPluginOptions['babelHelpers'],
     exclude: /\/node_modules\//,
     babelrc: false,
     // ref: https://github.com/rollup/rollup-plugin-babel#usage
-    extensions,
+    extensions
   };
   if (importLibToEs && type === 'esm') {
     babelOpts.plugins.push(require.resolve('../lib/importLibToEs'));

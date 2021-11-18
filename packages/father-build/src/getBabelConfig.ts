@@ -1,5 +1,6 @@
 import { extname } from 'path';
 import { ModuleFormat } from 'rollup';
+import chalk from 'chalk';
 
 interface IGetBabelConfigOpts {
   target: 'browser' | 'node';
@@ -19,6 +20,7 @@ interface IGetBabelConfigOpts {
     paths?: any[];
     plugins?: any[];
   };
+  vueCompile?: boolean;
 }
 
 function transformImportLess2Css() {
@@ -38,10 +40,15 @@ function transformImportLess2Css() {
 export default function(opts: IGetBabelConfigOpts) {
   const { target, typescript, type, runtimeHelpers, filePath, browserFiles, nodeFiles, nodeVersion, lazy, lessInBabelMode } = opts;
   let isBrowser = target === 'browser';
+  // 简单判断下。如果包含.vue 就走vue的编译
+  let vueCompile = opts.vueCompile || false;
   // rollup 场景下不会传入 filePath
   if (filePath) {
     if (extname(filePath) === '.tsx' || extname(filePath) === '.jsx') {
       isBrowser = true;
+      if (filePath.includes('.vue')) {
+        vueCompile = true;
+      }
     } else {
       if (isBrowser) {
         if (nodeFiles.includes(filePath)) isBrowser = false;
@@ -52,6 +59,10 @@ export default function(opts: IGetBabelConfigOpts) {
   }
   const targets = isBrowser ? { browsers: ['last 2 versions', 'IE 10'] } : { node: nodeVersion || 6 };
 
+  if (vueCompile) {
+    console.log(chalk.yellow('match vue compile'));
+  }
+
   return {
     opts: {
       presets: [
@@ -60,7 +71,7 @@ export default function(opts: IGetBabelConfigOpts) {
           targets,
           modules: type === 'esm' ? false : 'auto'
         }],
-        ...(isBrowser ? [require.resolve('@babel/preset-react')] : []),
+        ...(isBrowser && !vueCompile ? [require.resolve('@babel/preset-react')] : []),
       ],
       plugins: [
         ...((type === 'cjs' && lazy && !isBrowser)
@@ -69,7 +80,7 @@ export default function(opts: IGetBabelConfigOpts) {
           }]]
           : []),
         ...(lessInBabelMode ? [transformImportLess2Css] : []),
-        ...(isBrowser ? [require.resolve('babel-plugin-react-require')] : []),
+        ...(isBrowser ? [require.resolve(vueCompile ? '@vue/babel-plugin-jsx' : 'babel-plugin-react-require')] : []),
         require.resolve('@babel/plugin-syntax-dynamic-import'),
         require.resolve('@babel/plugin-proposal-export-default-from'),
         require.resolve('@babel/plugin-proposal-export-namespace-from'),

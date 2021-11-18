@@ -21,6 +21,7 @@
     "umi-test": "^1.5.12"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "demo"
   ]
 }

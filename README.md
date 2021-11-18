@@ -1,3 +1,27 @@
+由于gulp-less的原因fork一份出来发布出去来使用
+
+---
+
+补充了`vue`支持(仅`babel`模式, 且使用`jsx`):    
+
+使用方式: 
+
+- 所有类型配置`type`为`babel`(此外`bebel`现在可以读取入口文件所在的文件夹, 不局限于`src`了)
+
+```js
+export default {
+  entry: ['customDIR/index.ts'] // 此时babel会以customDIR为编译目录
+}
+```
+
+- 文件包含`.vue`在`esm`和`cjs`模式会自动使用`vue`编译
+
+- `umd`仅需要在配置里增加`vueCompile: true`即会自动使用`vue`编译
+
+注意注意: 一定要使用`babel`模式呀！！！！
+
+---
+
 # father
 
 <img src="https://www.youngisthan.in/wp-content/uploads/2018/09/Fathers-day.jpg" width="160" />

@@ -26,6 +26,7 @@ interface IUmd {
   minFile?: boolean;
   file?: string;
   sourcemap?: boolean;
+  vueCompile?: boolean;
 }
 
 export interface IBundleOptions {

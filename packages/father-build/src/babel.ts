@@ -57,9 +57,12 @@ export default async function (opts: IBabelOpts) {
       disableTypeCheck,
       cjs,
       lessInBabelMode,
+      entry
     },
   } = opts;
-  const srcPath = join(cwd, "src");
+
+  const srcPath = join(cwd, entry?.length ? Array.isArray(entry) ? entry[0].replace(/\/\D+\.ts/, '') : entry : "src");
+  log(chalk.red(`transfer directory: ${srcPath}`));
   const targetDir = type === "esm" ? "es" : "lib";
   const targetPath = join(cwd, targetDir);
 

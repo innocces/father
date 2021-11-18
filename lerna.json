@@ -11,7 +11,8 @@
     "cacheDir": ".changelog"
   },
   "packages": [
-    "packages/*"
+    "packages/*",
+    "demo"
   ],
   "command": {
     "version": {
@@ -20,5 +21,8 @@
   },
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "independent"
+  "version": "independent",
+  "publish": {
+    "registry": "https://registry.npmjs.org"
+  }
 }

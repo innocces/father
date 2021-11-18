@@ -19,6 +19,7 @@ interface IRollupOpts {
 
 async function build(entry: string, opts: IRollupOpts) {
   const { cwd, rootPath, type, log, bundleOpts, importLibToEs, dispose } = opts;
+
   const rollupConfigs = getRollupConfig({
     cwd,
     rootPath:rootPath || cwd,
