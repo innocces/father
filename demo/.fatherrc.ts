@@ -26,6 +26,7 @@ export default {
         umd: { name: 'vueEntry', file: 'vueEntry', vueCompile: true , globals: { vue: 'Vue' }},
       },
     },
+    runtimeHelpers: true,
     injectCSS: false, // 不注入css
     extractCSS: false, // 单独提取css
     disableTypeCheck: true,
