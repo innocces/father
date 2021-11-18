@@ -7,7 +7,8 @@
     "clean": "lerna clean -y",
     "test": "umi-test --coverage",
     "debug": "umi-test",
-    "publish": "npm run build && lerna publish"
+    "publish": "npm run build && lerna publish",
+    "publish:father-build": "npm run build && lerna exec -- npm publish --scope=father-build-offline"
   },
   "devDependencies": {
     "@types/jest": "^24.0.13",

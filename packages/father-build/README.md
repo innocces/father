@@ -1,4 +1,4 @@
 # father-build
 
-See our [main repo](https://github.com/umijs/father) for more information.
+See our [main repo](https://github.com/innocces/father) for more information.
 
