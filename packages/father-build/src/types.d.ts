@@ -66,10 +66,12 @@ export interface IBundleOptions {
     eslint?: boolean;
     prettier?: boolean;
   };
-  lessInBabelMode?: boolean | {
-    paths?: any[];
-    plugins?: any[];
-  };
+  lessInBabelMode?:
+    | boolean
+    | {
+        paths?: any[];
+        plugins?: any[];
+      };
   typescriptOpts?: {
     [value: string]: any;
   };
@@ -77,12 +79,25 @@ export interface IBundleOptions {
     [value: string]: any;
   };
   lessInRollupMode?: {
-    [opt: string]: any
+    [opt: string]: any;
   };
   sassInRollupMode?: {
-    [opt: string]: any
+    [opt: string]: any;
   };
   pkgs?: string[];
+  /** 处理 lerna 包 */
+  pkgFilter?: {
+    /** 指定包含的包 */
+    include?: string[];
+    /** 指定排除的包 */
+    exclude?: string[];
+    /**
+     * 跳过私有的包 package.json private
+     * @default false
+     * */
+    skipPrivate?: boolean;
+  };
+  config?: string;
 }
 
 export interface IOpts {
