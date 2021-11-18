@@ -27,7 +27,7 @@ export default {
       },
     },
     runtimeHelpers: true,
-    injectCSS: false, // 不注入css
-    extractCSS: false, // 单独提取css
+    injectCSS: false,
+    extractCSS: false,
     disableTypeCheck: true,
   };
